@@ -106,7 +106,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
   Widget finalRow() {
     return Container(
         color: Colors.black,
-        height: 200,
+        height: 100,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
