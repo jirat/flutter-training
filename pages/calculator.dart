@@ -32,15 +32,14 @@ class _CalculatorPageState extends State<CalculatorPage> {
                 height: 100,
                 width: double.infinity,
                 child: FittedBox(
-                    fit: BoxFit.fitWidth,
+                    fit: BoxFit.none,
                     child: Text(
                       _cal.join(),
-                      textAlign: TextAlign.right,
-                      softWrap: false,
+                      textAlign: TextAlign.end,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.white.withOpacity(1.0),
-                          fontSize: 50.00),
+                          fontSize: 20.00),
                     )))),
         Column(
           children: [
