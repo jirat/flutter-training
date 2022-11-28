@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: BlocProvider(
-            create: ((context) => CalPageBloc()),
+            create: (context) => CalPageBloc(),
             child: const CalculatorPage(title: 'Calculator')));
   }
 }

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'bloc/cal_page_bloc.dart';
 
 class CalculatorPage extends StatefulWidget {
   const CalculatorPage({super.key, required this.title});
@@ -10,8 +13,17 @@ class CalculatorPage extends StatefulWidget {
 }
 
 class _CalculatorPageState extends State<CalculatorPage> {
+  late CalPageBloc bloc;
+
   final List<String> _cal = [];
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    bloc = BlocProvider.of<CalPageBloc>(context);
+  }
+
+  //Bloc Provider will call before build
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,9 +102,16 @@ class _CalculatorPageState extends State<CalculatorPage> {
         ));
   }
 
+  final numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
   Widget generateButton(String text, Color color, Color fontColor) {
     return ElevatedButton(
-        onPressed: () => {addText(text)},
+        onPressed: () {
+          if (numbers.contains(text)) {
+            bloc.add(OperandEvent(text));
+          } else {
+            bloc.add(OperatorEvent(text));
+          }
+        },
         style: ElevatedButton.styleFrom(
             backgroundColor: color,
             shape: const CircleBorder(),
@@ -120,7 +139,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
 
   Widget zeroButton() {
     return ElevatedButton(
-        onPressed: () => {addText('0')},
+        onPressed: () => {bloc.add(OperandEvent('0'))},
         style: ElevatedButton.styleFrom(
             backgroundColor: Colors.blue,
             shape: const StadiumBorder(),
@@ -134,7 +153,11 @@ class _CalculatorPageState extends State<CalculatorPage> {
 
   void addText(String text) {
     setState(() {
-      _cal.add(text);
+      if (text == 'C') {
+        _cal.clear();
+      } else {
+        _cal.add(text);
+      }
     });
   }
 }

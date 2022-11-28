@@ -8,4 +8,11 @@ abstract class CalPageState extends Equatable {
   List<Object> get props => [];
 }
 
-class CalPageInitial extends CalPageState {}
+class CalPageInitial extends CalPageState {
+  const CalPageInitial({this.output = "0"});
+
+  final String output;
+
+  @override
+  List<Object> get props => [output];
+}
