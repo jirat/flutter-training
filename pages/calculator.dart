@@ -44,14 +44,18 @@ class _CalculatorPageState extends State<CalculatorPage> {
                 height: 100,
                 width: double.infinity,
                 child: FittedBox(
-                    fit: BoxFit.none,
-                    child: Text(
-                      _cal.join(),
-                      textAlign: TextAlign.end,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white.withOpacity(1.0),
-                          fontSize: 20.00),
+                    alignment: Alignment.bottomRight,
+                    child: BlocBuilder<CalPageBloc, CalPageState>(
+                      builder: (context, state) {
+                        return Text(
+                          state.output,
+                          textAlign: TextAlign.end,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white.withOpacity(1.0),
+                              fontSize: 80.00),
+                        );
+                      },
                     )))),
         Column(
           children: [
@@ -149,15 +153,5 @@ class _CalculatorPageState extends State<CalculatorPage> {
                 fontSize: 30,
                 color: Colors.white,
                 fontWeight: FontWeight.bold)));
-  }
-
-  void addText(String text) {
-    setState(() {
-      if (text == 'C') {
-        _cal.clear();
-      } else {
-        _cal.add(text);
-      }
-    });
   }
 }
